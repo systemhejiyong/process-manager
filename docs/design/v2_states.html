@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;background:#c9ced8;padding:28px;color:#111827}
+.wrap{display:flex;gap:28px;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:10px}
+.cap{font-size:13px;font-weight:650;color:#0D7370}
+.window{width:560px;background:#F4F5F7;border-radius:10px;overflow:hidden;box-shadow:0 12px 36px rgba(0,0,0,.18);border:1px solid #b8bec9;position:relative}
+.titlebar{height:34px;background:#fff;display:flex;align-items:center;padding:0 12px;border-bottom:1px solid #D8DCE3;font-size:12px;font-weight:600}
+.dots{display:flex;gap:5px;margin-right:10px}.dots i{width:9px;height:9px;border-radius:50%;display:block}
+.r{background:#ff5f57}.y{background:#febc2e}.g{background:#28c840}
+.top{padding:12px 14px 0;display:flex;justify-content:space-between;align-items:center}
+.top h1{font-size:14px;font-weight:650}
+.chip{font-size:10px;font-weight:600;padding:3px 8px;border-radius:999px;background:#FEF3C7;color:#92400E;border:1px solid #F5D78E}
+.chip.admin{background:#D1FAE5;color:#065F46;border-color:#6EE7B7}
+.body{padding:12px 14px}
+.card{background:#fff;border:1px solid #D8DCE3;border-radius:8px;padding:10px;margin-bottom:10px}
+.seg{display:inline-flex;background:#EEF0F3;border-radius:6px;padding:2px;margin-bottom:8px}
+.seg span{font-size:11px;font-weight:600;padding:4px 10px;border-radius:5px;color:#6B7280}
+.seg span.on{background:#fff;color:#0D7370;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+input{height:28px;border:1px solid #D8DCE3;border-radius:6px;padding:0 8px;font-size:11px;width:140px}
+.btn{height:28px;padding:0 10px;border-radius:6px;border:1px solid #D8DCE3;background:#fff;font-size:11px;font-weight:600}
+.btn.primary{background:#0D7370;border-color:#0D7370;color:#fff}
+.btn.danger{background:#D92D20;border-color:#D92D20;color:#fff}
+.panel{background:#fff;border:1px solid #D8DCE3;border-radius:8px;overflow:hidden;min-height:200px}
+.phd{padding:7px 10px;background:#EEF0F3;border-bottom:1px solid #D8DCE3;font-size:11px;font-weight:650}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:36px 20px;text-align:center;color:#6B7280}
+.empty .ico{width:48px;height:48px;border-radius:12px;background:#E6F4F3;color:#0D7370;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px;font-weight:700}
+.empty b{color:#111827;font-size:13px;margin-bottom:6px}
+.empty p{font-size:11px;line-height:1.5;max-width:280px}
+.empty code{background:#EEF0F3;padding:1px 5px;border-radius:3px;font-size:11px;color:#0D7370}
+.banner{margin-bottom:10px;background:#FEECEC;border:1px solid #F5C2C0;color:#B42318;border-radius:8px;padding:8px 10px;font-size:11px;line-height:1.45;display:flex;gap:8px;align-items:flex-start}
+.banner .x{font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th,td{padding:6px 8px;border-bottom:1px solid #F0F2F5;text-align:left}
+th{font-size:10px;color:#6B7280;background:#FAFBFC}
+.muted{color:#9CA3AF}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:10.5px}
+.mask{position:absolute;inset:34px 0 0 0;background:rgba(17,24,39,.45);display:flex;align-items:center;justify-content:center}
+.modal{width:360px;background:#fff;border-radius:10px;box-shadow:0 20px 50px rgba(0,0,0,.35);overflow:hidden}
+.modal .mh{padding:14px 16px 8px;font-size:14px;font-weight:650}
+.modal .mb{padding:0 16px 14px;font-size:12px;color:#4B5563;line-height:1.55}
+.modal .mb strong{color:#111827}
+.modal .list{background:#F4F5F7;border-radius:6px;padding:8px 10px;margin:10px 0;font-family:ui-monospace,Consolas,monospace;font-size:11px;color:#374151}
+.modal .mf{display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:1px solid #E5E7EB;background:#FAFBFC}
+.tiny{font-size:11px;color:#6B7280;padding:0 14px 12px}
+</style></head><body>
+<div class="wrap">
+
+  <div class="col">
+    <div class="cap">A · 空态 / 无结果</div>
+    <div class="window">
+      <div class="titlebar"><div class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></div>进程查找关闭工具</div>
+      <div class="top"><h1>本机进程与端口</h1><div class="chip">标准用户</div></div>
+      <div class="body">
+        <div class="card">
+          <div class="seg"><span class="on">按进程名</span><span>按端口</span></div>
+          <div class="row">
+            <input type="text" value="qoder"/>
+            <button class="btn primary">查找</button>
+            <button class="btn">刷新列表</button>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="phd">匹配结果</div>
+          <div class="empty">
+            <div class="ico">∅</div>
+            <b>没有找到匹配的进程</b>
+            <p>未找到名称包含 <code>qoder</code> 的进程。试试 <code>node</code>、<code>python</code>，或切换到「按端口」查 <code>5173</code>。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="cap">B · 关闭确认</div>
+    <div class="window">
+      <div class="titlebar"><div class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></div>进程查找关闭工具</div>
+      <div class="top"><h1>本机进程与端口</h1><div class="chip">标准用户</div></div>
+      <div class="body">
+        <div class="card"><div class="row"><input value="node"/><button class="btn primary">查找</button><button class="btn danger">一键关闭</button></div></div>
+        <div class="panel" style="min-height:160px;opacity:.55">
+          <div class="phd">匹配结果 · 30 条</div>
+          <table><thead><tr><th>PID</th><th>进程名</th><th>端口</th></tr></thead>
+          <tbody><tr><td class="mono">140902</td><td>node.exe</td><td>5173</td></tr>
+          <tr><td class="mono">141088</td><td>node.exe</td><td class="muted">—</td></tr></tbody></table>
+        </div>
+      </div>
+      <div class="mask">
+        <div class="modal">
+          <div class="mh">确认关闭进程？</div>
+          <div class="mb">
+            将结束 <strong>30</strong> 个同名匹配进程，以及已勾选的 <strong>3</strong> 个相关进程。<br/>关闭后会监控 4 秒，若被重新拉起会写入操作记录。
+            <div class="list">node.exe × 30<br/>Cursor.exe · 父进程<br/>node.exe · 相同路径 × 2</div>
+            此操作不可撤销。
+          </div>
+          <div class="mf">
+            <button class="btn">取消</button>
+            <button class="btn danger">确认关闭</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="cap">C · 无权限 / 关闭失败</div>
+    <div class="window">
+      <div class="titlebar"><div class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></div>进程查找关闭工具</div>
+      <div class="top"><h1>本机进程与端口</h1><div class="chip">标准用户</div></div>
+      <div class="body">
+        <div class="banner"><span class="x">!</span><div>关闭 PID 12（systemd）失败：权限不足。请点击「提权重新启动」后再试。不会静默失败。</div></div>
+        <div class="card">
+          <div class="seg"><span>按进程名</span><span class="on">按端口</span></div>
+          <div class="row">
+            <input class="port" value="53" style="width:80px"/>
+            <button class="btn primary">按端口查</button>
+            <button class="btn">提权重新启动</button>
+          </div>
+        </div>
+        <div class="panel" style="min-height:140px">
+          <div class="phd">匹配结果 · 1 条</div>
+          <table>
+            <thead><tr><th>PID</th><th>进程名</th><th>端口</th><th>项目目录</th></tr></thead>
+            <tbody>
+              <tr>
+                <td class="mono">12</td><td>systemd</td><td>53</td>
+                <td class="muted">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tiny">操作记录：[09:10:41] 关闭失败 · 权限不足（标准用户）</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body></html>

@@ -10,3 +10,8 @@ app/src-tauri/target
 dist/
 ref.png
 ref.webp
+design/v1_main.*
+node_modules/
+*.deb
+*.rpm
+*.AppImage
