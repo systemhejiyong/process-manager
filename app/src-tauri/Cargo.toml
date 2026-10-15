@@ -1,0 +1,20 @@
+[package]
+name = "process-manager"
+version = "0.1.0"
+description = "进程查找关闭工具"
+authors = ["process-manager"]
+edition = "2021"
+
+[lib]
+name = "app_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+procman-core = { path = "../../crates/procman-core" }

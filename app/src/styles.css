@@ -1,0 +1,52 @@
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg-app:#F4F5F7;--bg-surface:#FFFFFF;--bg-muted:#EEF0F3;--border:#D8DCE3;
+  --text:#111827;--text2:#6B7280;--accent:#0D7370;--accent-soft:#E6F4F3;
+  --danger:#D92D20;--warn:#B54708;--success:#027A48;
+}
+html,body{height:100%;font-family:"Segoe UI","PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;background:var(--bg-app);color:var(--text);font-size:12px}
+.app{display:flex;flex-direction:column;height:100%;padding:16px;gap:12px}
+.top{display:flex;justify-content:space-between;align-items:flex-start}
+.top h1{font-size:16px;font-weight:650}
+.sub{font-size:11px;color:var(--text2);margin-top:4px;max-width:760px;line-height:1.45}
+.chip{font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid #F5D78E;background:#FEF3C7;color:#92400E}
+.chip.admin{background:#D1FAE5;color:#065F46;border-color:#A7F3D0}
+.card,.panel{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px}
+.card{padding:12px}
+.seg{display:inline-flex;background:var(--bg-muted);border-radius:6px;padding:2px;margin-bottom:10px}
+.seg button{border:0;background:transparent;font-size:12px;font-weight:600;padding:5px 14px;border-radius:5px;color:var(--text2);cursor:pointer}
+.seg button.on{background:#fff;color:var(--accent);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.l{color:var(--text2)}
+input[type=text]{height:32px;border:1px solid var(--border);border-radius:6px;padding:0 10px;min-width:200px;background:#fff}
+.btn{height:32px;padding:0 14px;border-radius:6px;border:1px solid var(--border);background:#fff;font-size:12px;font-weight:600;cursor:pointer;color:var(--text)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.danger{background:var(--danger);border-color:var(--danger);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.link{height:auto;padding:2px 6px;border:0;background:transparent;color:var(--accent)}
+.meta{margin-left:auto;font-size:11px;color:var(--text2)}
+.check{display:flex;align-items:center;gap:6px}
+.phd{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:var(--bg-muted);border-bottom:1px solid var(--border);font-size:12px;font-weight:650}
+.phd .h{font-weight:500;color:var(--text2);font-size:11px}
+.table-wrap{max-height:280px;overflow:auto}
+table{width:100%;border-collapse:collapse;table-layout:fixed}
+th{text-align:left;padding:7px 10px;font-size:11px;font-weight:600;color:var(--text2);background:#FAFBFC;border-bottom:1px solid #E5E7EB;position:sticky;top:0}
+td{padding:7px 10px;border-bottom:1px solid #F0F2F5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tr{cursor:pointer}
+tr.sel{background:var(--accent-soft)}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:11.5px}
+.pill{display:inline-block;background:var(--accent-soft);color:var(--accent);border:1px solid #B7DFDC;border-radius:4px;padding:1px 6px;font-size:11px;font-weight:600;margin-right:3px}
+.muted{color:#9CA3AF}
+.empty{padding:36px;text-align:center;color:var(--text2)}
+.empty-ico{font-size:28px;margin-bottom:8px;opacity:.5}
+.hint{font-size:11px;margin-top:6px}
+.log{padding:8px 12px;font-family:ui-monospace,Consolas,monospace;font-size:11px;line-height:1.6;background:#FAFBFC;min-height:72px;max-height:120px;overflow:auto}
+.log .ok{color:var(--success)}.log .warn{color:var(--warn)}.log .info{color:#4B5563}.log .err{color:var(--danger)}
+.bar{display:flex;justify-content:space-between;font-size:11px;color:var(--text2);padding-top:4px}
+.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:rgba(17,24,39,.45);display:flex;align-items:center;justify-content:center;z-index:50}
+.dialog{background:#fff;border-radius:10px;padding:20px;width:400px;box-shadow:0 16px 48px rgba(0,0,0,.2)}
+.dialog h2{font-size:16px;margin-bottom:8px}
+.dialog p{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:16px}
+.dialog-actions{display:flex;justify-content:flex-end;gap:8px}

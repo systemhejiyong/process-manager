@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;background:#c9ced8;padding:28px;color:#111827}
+.window{width:1200px;background:#F4F5F7;border-radius:10px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.2);border:1px solid #b8bec9}
+.titlebar{height:36px;background:#fff;display:flex;align-items:center;padding:0 14px;border-bottom:1px solid #D8DCE3;font-size:13px;font-weight:600;color:#374151}
+.dots{display:flex;gap:6px;margin-right:12px}.dots i{width:10px;height:10px;border-radius:50%;display:block}
+.r{background:#ff5f57}.y{background:#febc2e}.g{background:#28c840}
+.brand{display:flex;align-items:center;gap:8px;flex:1}
+.logo{width:18px;height:18px;border-radius:4px;background:#0D7370;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700}
+.top{display:flex;justify-content:space-between;align-items:flex-start;padding:16px 16px 0}
+.top h1{font-size:16px;font-weight:650;letter-spacing:.2px}
+.top .sub{font-size:11px;color:#6B7280;margin-top:4px;line-height:1.45;max-width:760px}
+.chip{font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;background:#FEF3C7;color:#92400E;border:1px solid #F5D78E;white-space:nowrap}
+.chip::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:#F59E0B;margin-right:6px;vertical-align:1px}
+.body{padding:14px 16px 12px}
+.card{background:#fff;border:1px solid #D8DCE3;border-radius:8px;padding:12px;margin-bottom:12px}
+.seg{display:inline-flex;background:#EEF0F3;border-radius:6px;padding:2px;margin-bottom:10px}
+.seg span{font-size:12px;font-weight:600;padding:5px 14px;border-radius:5px;color:#6B7280}
+.seg span.on{background:#fff;color:#0D7370;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+label.l{font-size:12px;color:#6B7280}
+input[type=text]{height:32px;border:1px solid #D8DCE3;border-radius:6px;padding:0 10px;font-size:12px;background:#fff;min-width:200px}
+input.port{min-width:100px;width:100px}
+.btn{height:32px;padding:0 14px;border-radius:6px;border:1px solid #D8DCE3;background:#fff;font-size:12px;font-weight:600;color:#111827}
+.btn.primary{background:#0D7370;border-color:#0D7370;color:#fff}
+.btn.danger{background:#D92D20;border-color:#D92D20;color:#fff}
+.btn:disabled,.btn.disabled{opacity:.45}
+.meta{margin-left:auto;font-size:11px;color:#6B7280}
+.check{display:flex;align-items:center;gap:6px;font-size:12px;color:#374151}
+.check input{width:14px;height:14px}
+.panel{background:#fff;border:1px solid #D8DCE3;border-radius:8px;overflow:hidden;margin-bottom:12px}
+.phd{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#EEF0F3;border-bottom:1px solid #D8DCE3;font-size:12px;font-weight:650}
+.phd .h{font-weight:500;color:#6B7280;font-size:11px}
+table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+th{text-align:left;padding:7px 10px;font-size:11px;font-weight:600;color:#6B7280;background:#FAFBFC;border-bottom:1px solid #E5E7EB;white-space:nowrap}
+td{padding:7px 10px;border-bottom:1px solid #F0F2F5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle}
+tr.sel{background:#E6F4F3}
+tr.sel td{color:#0a5553}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:11.5px}
+.pill{display:inline-block;background:#E6F4F3;color:#0D7370;border:1px solid #B7DFDC;border-radius:4px;padding:1px 6px;font-size:11px;font-weight:600;margin-right:3px}
+.muted{color:#9CA3AF}
+.tag{display:inline-block;font-size:11px;padding:1px 7px;border-radius:4px;font-weight:600}
+.tag.p{background:#FFF7ED;color:#B54708}
+.tag.s{background:#EFF6FF;color:#1D4ED8}
+.tag.d{background:#F5F3FF;color:#6D28D9}
+.log{padding:8px 12px;font-family:ui-monospace,Consolas,monospace;font-size:11px;line-height:1.6;background:#FAFBFC;height:72px;overflow:hidden}
+.log .ok{color:#027A48}.log .warn{color:#B54708}.log .info{color:#4B5563}
+.bar{display:flex;justify-content:space-between;padding:7px 14px;background:#EEF0F3;border-top:1px solid #D8DCE3;font-size:11px;color:#6B7280}
+.note{margin-top:12px;font-size:12px;color:#374151;max-width:1200px;line-height:1.55}
+.note b{color:#0D7370}
+</style></head><body>
+<div class="window">
+  <div class="titlebar">
+    <div class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+    <div class="brand"><span class="logo">P</span>进程查找关闭工具</div>
+  </div>
+  <div class="top">
+    <div>
+      <h1>本机进程与端口</h1>
+      <div class="sub">按进程名或端口定位占用方与项目目录；可勾选相关进程一并关闭。数据只在本机，不上传。</div>
+    </div>
+    <div class="chip">标准用户</div>
+  </div>
+  <div class="body">
+    <div class="card">
+      <div class="seg"><span class="on">按进程名</span><span>按端口</span></div>
+      <div class="row">
+        <label class="l">关键词</label>
+        <input type="text" value="node"/>
+        <button class="btn primary">查找</button>
+        <button class="btn">刷新列表</button>
+        <label class="check"><input type="checkbox" checked/> 关闭时包含全部同名匹配</label>
+        <button class="btn danger">一键关闭</button>
+        <button class="btn">以管理员身份重新启动</button>
+        <span class="meta">30 条结果</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="phd">匹配结果 <span class="h">点击一行展开相关进程 · 支持列排序</span></div>
+      <table>
+        <colgroup>
+          <col style="width:72px"/><col style="width:88px"/><col style="width:110px"/>
+          <col style="width:210px"/><col style="width:120px"/><col/><col style="width:150px"/>
+        </colgroup>
+        <thead><tr>
+          <th>PID</th><th>进程名</th><th>监听端口</th><th>项目目录</th><th>父进程</th><th>命令行</th><th>完整路径</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td class="mono">98211</td><td>node.exe</td>
+            <td><span class="pill">9527</span></td>
+            <td class="mono">D:\work\self\yimiao\web</td>
+            <td>cmd (99804)</td>
+            <td class="mono">node server.js --port 9527</td>
+            <td class="mono">C:\Program Files\nodejs\node.exe</td>
+          </tr>
+          <tr class="sel">
+            <td class="mono">140902</td><td>node.exe</td>
+            <td><span class="pill">5173</span></td>
+            <td class="mono">D:\work\github\app-demo\web</td>
+            <td>Cursor (140836)</td>
+            <td class="mono">node …/vite.js --host</td>
+            <td class="mono">C:\Program Files\nodejs\node.exe</td>
+          </tr>
+          <tr>
+            <td class="mono">141088</td><td>node.exe</td>
+            <td><span class="muted">—</span></td>
+            <td class="mono">D:\work\github\app-demo\web</td>
+            <td>node (140902)</td>
+            <td class="mono">node …/esbuild --service</td>
+            <td class="mono">C:\Program Files\nodejs\node.exe</td>
+          </tr>
+          <tr>
+            <td class="mono">22014</td><td>node</td>
+            <td><span class="pill">3000</span></td>
+            <td class="mono">/home/dev/projects/api</td>
+            <td>bash (21990)</td>
+            <td class="mono">node dist/index.js</td>
+            <td class="mono">/usr/bin/node</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel">
+      <div class="phd">相关进程 <span class="h">已勾选 3 / 3 · 一键关闭会一起结束</span></div>
+      <table>
+        <colgroup>
+          <col style="width:48px"/><col style="width:100px"/><col style="width:72px"/>
+          <col style="width:100px"/><col/><col style="width:90px"/>
+        </colgroup>
+        <thead><tr><th>一并</th><th>关系</th><th>PID</th><th>进程名</th><th>完整路径</th><th>服务</th></tr></thead>
+        <tbody>
+          <tr>
+            <td style="text-align:center"><input type="checkbox" checked/></td>
+            <td><span class="tag p">父进程</span></td>
+            <td class="mono">140836</td><td>Cursor.exe</td>
+            <td class="mono">C:\Users\…\Cursor\Cursor.exe</td><td class="muted">—</td>
+          </tr>
+          <tr>
+            <td style="text-align:center"><input type="checkbox" checked/></td>
+            <td><span class="tag s">相同路径</span></td>
+            <td class="mono">141088</td><td>node.exe</td>
+            <td class="mono">C:\Program Files\nodejs\node.exe</td><td class="muted">—</td>
+          </tr>
+          <tr>
+            <td style="text-align:center"><input type="checkbox" checked/></td>
+            <td><span class="tag d">同项目目录</span></td>
+            <td class="mono">141201</td><td>node.exe</td>
+            <td class="mono">C:\Program Files\nodejs\node.exe</td><td class="muted">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="panel" style="margin-bottom:0">
+      <div class="phd">操作记录</div>
+      <div class="log">
+        <div class="info">[09:12:04] 查找「node」，找到 30 个匹配。</div>
+        <div class="ok">[09:12:18] 已结束 PID 140902。连续 4 秒内未发现同名进程被重新拉起。</div>
+        <div class="warn">[09:10:41] 关闭 PID 12 失败：权限不足，请提权后重试。</div>
+        <div class="info">[09:08:02] 按端口 5173 查询，命中 1 个进程。</div>
+      </div>
+    </div>
+  </div>
+  <div class="bar">
+    <span>30 条匹配 · 选中 PID 140902 · 相关已勾选 3</span>
+    <span>v2.0 · Windows / Linux</span>
+  </div>
+</div>
+<div class="note"><b>v2_main</b> 正式主界面：白顶栏 + 青绿点缀；搜索用分段控件；危钮仅「一键关闭」；选中行浅绿；相关进程关系标签分色。Linux 将提权按钮文案改为「提权重新启动」。</div>
+</body></html>

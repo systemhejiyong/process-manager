@@ -1,0 +1,12 @@
+**/*.rs.bk
+*.exe
+*.msi
+.DS_Store
+/dist
+/target
+app/dist
+app/node_modules
+app/src-tauri/target
+dist/
+ref.png
+ref.webp

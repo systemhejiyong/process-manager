@@ -1,0 +1,15 @@
+[package]
+name = "procman-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Linux CLI for process-manager (procman)"
+
+[[bin]]
+name = "procman"
+path = "src/main.rs"
+
+[dependencies]
+procman-core = { workspace = true }
+clap = { workspace = true }
+serde_json = { workspace = true }

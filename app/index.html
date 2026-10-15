@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>进程查找关闭工具</title>
+  <link rel="stylesheet" href="/src/styles.css" />
+  <script type="module" src="/src/main.ts" defer></script>
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div>
+        <h1>本机进程与端口</h1>
+        <p class="sub">按进程名或端口定位占用方与项目目录；可勾选相关进程一并关闭。数据只在本机，不上传。</p>
+      </div>
+      <div id="perm-chip" class="chip std">标准用户</div>
+    </header>
+
+    <section class="card">
+      <div class="seg" id="mode-seg">
+        <button type="button" class="on" data-mode="name">按进程名</button>
+        <button type="button" data-mode="port">按端口</button>
+      </div>
+      <div class="row">
+        <label class="l" id="query-label">关键词</label>
+        <input id="query" type="text" placeholder="例如 node" />
+        <button class="btn primary" id="btn-search">查找</button>
+        <button class="btn" id="btn-refresh">刷新列表</button>
+        <label class="check"><input type="checkbox" id="chk-same-name" /> 关闭时包含全部同名匹配</label>
+        <button class="btn danger" id="btn-kill">一键关闭</button>
+        <button class="btn" id="btn-elevate">提权重新启动</button>
+        <span class="meta" id="count">0 条结果</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="phd">匹配结果 <span class="h">点击一行展开相关进程 · 右侧「关闭」结束单个进程</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:72px">PID</th>
+              <th style="width:100px">进程名</th>
+              <th style="width:110px">监听端口</th>
+              <th style="width:200px">项目目录</th>
+              <th style="width:130px">父进程</th>
+              <th>命令行</th>
+              <th style="width:140px">完整路径</th>
+              <th style="width:70px">操作</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div id="empty" class="empty hidden">
+        <div class="empty-ico">⌀</div>
+        <p>没有匹配的进程</p>
+        <p class="hint">试试搜 node 或端口 5173</p>
+      </div>
+    </section>
+
+    <section class="panel related hidden" id="related-panel">
+      <div class="phd">相关进程 <span class="h" id="related-summary">已勾选 0 / 0</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th style="width:40px"></th><th style="width:80px">关系</th><th style="width:72px">PID</th><th style="width:120px">进程名</th><th>完整路径</th></tr></thead>
+          <tbody id="related-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="phd">操作日志</div>
+      <div class="log" id="log"></div>
+    </section>
+
+    <footer class="bar">
+      <span id="status">就绪</span>
+      <span id="ver">v0.1.0</span>
+    </footer>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="dialog">
+      <h2>确认关闭</h2>
+      <p id="modal-msg">将结束 N 个进程。此操作不可撤销。</p>
+      <div class="dialog-actions">
+        <button class="btn" id="modal-cancel">取消</button>
+        <button class="btn danger" id="modal-ok">确认关闭</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
