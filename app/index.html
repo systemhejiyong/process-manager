@@ -25,7 +25,7 @@
       <div class="row">
         <label class="l" id="query-label">关键词</label>
         <input id="query" type="text" placeholder="例如 node" />
-        <button class="btn primary" id="btn-search">查找</button>
+        <button class="btn primary" id="btn-search"><span id="btn-search-label">查找</span></button>
         <button class="btn" id="btn-refresh">刷新列表</button>
         <label class="check"><input type="checkbox" id="chk-same-name" /> 关闭时包含全部同名匹配</label>
         <button class="btn danger" id="btn-kill">一键关闭</button>
@@ -34,8 +34,8 @@
       </div>
     </section>
 
-    <section class="panel">
-      <div class="phd">匹配结果 <span class="h">点击一行展开相关进程 · 右侧「关闭」结束单个进程</span></div>
+    <section class="panel panel-results">
+      <div class="phd">匹配结果 <span class="h" id="results-hint">点击一行展开相关进程 · 右侧「关闭」结束单个进程</span></div>
       <div class="table-wrap">
         <table>
           <thead>
@@ -53,16 +53,26 @@
           <tbody id="tbody"></tbody>
         </table>
       </div>
-      <div id="empty" class="empty hidden">
-        <div class="empty-ico">⌀</div>
-        <p>没有匹配的进程</p>
-        <p class="hint">试试搜 node 或端口 5173</p>
+      <div id="loading" class="loading hidden" aria-live="polite">
+        <div class="spinner"></div>
+        <p id="loading-text">查询中…</p>
+        <div class="progress"><i></i></div>
+      </div>
+      <div id="empty" class="empty">
+        <div class="empty-ico">⌕</div>
+        <p id="empty-title">先搜索，再看结果</p>
+        <p class="hint" id="empty-hint">打开时不加载全部进程。输入进程名点「查找」，或切换到「按端口」查询占用。<br/>示例：node　python　端口 5173</p>
       </div>
     </section>
 
     <section class="panel related hidden" id="related-panel">
       <div class="phd">相关进程 <span class="h" id="related-summary">已勾选 0 / 0</span></div>
-      <div class="table-wrap">
+      <div id="related-loading" class="rel-load hidden">
+        <span class="spinner sm"></span>
+        <span id="related-loading-text">正在加载…</span>
+      </div>
+      <div id="related-error" class="rel-err hidden"></div>
+      <div class="table-wrap" id="related-table-wrap">
         <table>
           <thead><tr><th style="width:40px"></th><th style="width:80px">关系</th><th style="width:72px">PID</th><th style="width:120px">进程名</th><th>完整路径</th></tr></thead>
           <tbody id="related-body"></tbody>
@@ -70,7 +80,7 @@
       </div>
     </section>
 
-    <section class="panel">
+    <section class="panel panel-log">
       <div class="phd">操作日志</div>
       <div class="log" id="log"></div>
     </section>
@@ -90,6 +100,17 @@
         <button class="btn danger" id="modal-ok">确认关闭</button>
       </div>
     </div>
+  </div>
+  <div id="ctx-menu" class="ctx-menu hidden" role="menu">
+    <button type="button" data-act="kill-one">关闭此进程</button>
+    <button type="button" data-act="kill-related">关闭此进程及相关进程</button>
+    <hr />
+    <button type="button" data-act="copy-name">复制进程名</button>
+    <button type="button" data-act="copy-pid">复制 PID</button>
+    <button type="button" data-act="copy-path">复制完整路径</button>
+    <button type="button" data-act="copy-ports">复制监听端口</button>
+    <button type="button" data-act="copy-project">复制项目目录</button>
+    <button type="button" data-act="copy-cmdline">复制命令行</button>
   </div>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","PingFang SC","Noto Sans CJK SC",sans-serif;background:#c9ced8;padding:40px;color:#111827}
+.stage{width:720px;height:340px;background:#fff;border-radius:8px;border:1px solid #D8DCE3;position:relative;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px}
+th{text-align:left;padding:8px 12px;font-size:11px;color:#6B7280;background:#FAFBFC;border-bottom:1px solid #E5E7EB}
+td{padding:8px 12px;border-bottom:1px solid #F0F2F5}
+tr.sel{background:#E6F4F3}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:11px}
+.menu{position:absolute;top:118px;left:280px;width:240px;background:#fff;border:1px solid #D8DCE3;border-radius:6px;box-shadow:0 8px 24px rgba(0,0,0,.18);padding:4px 0;font-size:12px;z-index:2}
+.menu div{padding:8px 14px;line-height:1.2}
+.menu div.hov{background:#EFF6FF}
+.menu hr{border:none;border-top:1px solid #E5E7EB;margin:4px 0}
+.cap{margin-top:12px;font-size:12px;color:#374151;max-width:720px;line-height:1.5}
+.cap b{color:#0D7370}
+.pill{display:inline-block;background:#E6F4F3;color:#0D7370;border-radius:4px;padding:1px 6px;font-size:11px;font-weight:600}
+.muted{color:#9CA3AF}
+</style></head><body>
+<div class="stage">
+  <table>
+    <thead><tr><th>PID</th><th>进程名</th><th>监听端口</th><th>项目目录</th><th>命令行</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">98211</td><td>node.exe</td><td><span class="pill">9527</span></td><td class="mono">D:\work\web</td><td class="mono">node server.js</td></tr>
+      <tr class="sel"><td class="mono">140902</td><td>java.exe</td><td><span class="pill">8080</span></td><td class="muted">—</td><td class="mono">C:\Users\…\App…</td></tr>
+      <tr><td class="mono">141088</td><td>node.exe</td><td class="muted">—</td><td class="mono">D:\work\web</td><td class="mono">node esbuild</td></tr>
+    </tbody>
+  </table>
+  <div class="menu">
+    <div class="hov">关闭此进程</div>
+    <div>关闭此进程及相关进程</div>
+    <hr/>
+    <div>复制进程名</div>
+    <div>复制 PID</div>
+    <div>复制完整路径</div>
+    <div>复制监听端口</div>
+    <div>复制项目目录</div>
+    <div>复制命令行</div>
+  </div>
+</div>
+<div class="cap"><b>v2_context_menu</b> · 上：关闭两项 · 下：六项复制 · 悬停浅蓝 · 走现有确认/硬拦</div>
+</body></html>

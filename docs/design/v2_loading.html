@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Segoe UI","PingFang SC","Noto Sans CJK SC","Microsoft YaHei",sans-serif;background:#c9ced8;padding:24px;color:#111827}
+.wrap{display:flex;gap:24px;align-items:flex-start}
+.col{display:flex;flex-direction:column;gap:8px}
+.cap{font-size:13px;font-weight:650;color:#0D7370}
+.window{width:520px;background:#F4F5F7;border-radius:10px;overflow:hidden;box-shadow:0 12px 36px rgba(0,0,0,.18);border:1px solid #b8bec9}
+.titlebar{height:32px;background:#fff;display:flex;align-items:center;padding:0 12px;border-bottom:1px solid #D8DCE3;font-size:12px;font-weight:600}
+.dots{display:flex;gap:5px;margin-right:10px}.dots i{width:9px;height:9px;border-radius:50%;display:block}
+.r{background:#ff5f57}.y{background:#febc2e}.g{background:#28c840}
+.top{padding:10px 12px 0;display:flex;justify-content:space-between;align-items:center}
+.top h1{font-size:13px;font-weight:650}
+.chip{font-size:10px;font-weight:600;padding:3px 8px;border-radius:999px;background:#FEF3C7;color:#92400E;border:1px solid #F5D78E}
+.body{padding:10px 12px}
+.card{background:#fff;border:1px solid #D8DCE3;border-radius:8px;padding:8px;margin-bottom:8px}
+.seg{display:inline-flex;background:#EEF0F3;border-radius:6px;padding:2px;margin-bottom:6px}
+.seg span{font-size:10px;font-weight:600;padding:3px 8px;border-radius:5px;color:#6B7280}
+.seg span.on{background:#fff;color:#0D7370;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+input{height:26px;border:1px solid #D8DCE3;border-radius:6px;padding:0 8px;font-size:11px;width:120px}
+.btn{height:26px;padding:0 10px;border-radius:6px;border:1px solid #D8DCE3;background:#fff;font-size:11px;font-weight:600}
+.btn.primary{background:#0D7370;border-color:#0D7370;color:#fff}
+.btn.primary:disabled,.btn.busy{opacity:.7;position:relative}
+.btn .spin,.spin{display:inline-block;width:12px;height:12px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:5px}
+.spin.dark{border-color:rgba(13,115,112,.25);border-top-color:#0D7370}
+@keyframes sp{to{transform:rotate(360deg)}}
+.panel{background:#fff;border:1px solid #D8DCE3;border-radius:8px;overflow:hidden;min-height:168px}
+.phd{padding:6px 10px;background:#EEF0F3;border-bottom:1px solid #D8DCE3;font-size:11px;font-weight:650;display:flex;justify-content:space-between}
+.phd .h{font-weight:500;color:#6B7280;font-size:10px}
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 16px;text-align:center;color:#6B7280;min-height:140px}
+.empty .ico{width:40px;height:40px;border-radius:10px;background:#E6F4F3;color:#0D7370;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:10px;font-weight:700}
+.empty b{color:#111827;font-size:12px;margin-bottom:4px}
+.empty p{font-size:10.5px;line-height:1.5;max-width:260px}
+.empty code{background:#EEF0F3;padding:1px 4px;border-radius:3px;font-size:10px;color:#0D7370}
+.loadbox{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:140px;gap:10px;color:#6B7280;font-size:11px}
+.bar{height:3px;background:#E6F4F3;border-radius:2px;overflow:hidden;width:60%;margin-top:2px}
+.bar i{display:block;height:100%;width:40%;background:#0D7370;border-radius:2px;animation:ind 1.1s ease-in-out infinite}
+@keyframes ind{0%{transform:translateX(-100%)}100%{transform:translateX(280%)}}
+table{width:100%;border-collapse:collapse;font-size:10.5px}
+th,td{padding:5px 8px;border-bottom:1px solid #F0F2F5;text-align:left}
+th{font-size:10px;color:#6B7280;background:#FAFBFC}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:10px}
+.sel{background:#E6F4F3}
+.rel-load{padding:14px;display:flex;align-items:center;gap:8px;font-size:11px;color:#6B7280;background:#FAFBFC}
+.note{margin-top:14px;font-size:12px;color:#374151;max-width:1600px;line-height:1.55}
+.note b{color:#0D7370}
+.muted{color:#9CA3AF}
+</style></head><body>
+<div class="wrap">
+
+<div class="col">
+  <div class="cap">A · 默认打开（不拉全量）</div>
+  <div class="window">
+    <div class="titlebar"><div class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></div>进程查找关闭工具</div>
+    <div class="top"><h1>本机进程与端口</h1><div class="chip">标准用户</div></div>
+    <div class="body">
+      <div class="card">
+        <div class="seg"><span class="on">按进程名</span><span>按端口</span></div>
+        <div class="row">
+          <input placeholder="输入进程名，如 node"/>
+          <button class="btn primary">查找</button>
+          <button class="btn">刷新列表</button>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="phd">匹配结果 <span class="h">尚未查询</span></div>
+        <div class="empty">
+          <div class="ico">⌕</div>
+          <b>先搜索，再看结果</b>
+          <p>打开时不加载全部进程。输入进程名点「查找」，或切换到「按端口」查询占用。</p>
+          <p style="margin-top:6px">示例：<code>node</code>　<code>python</code>　端口 <code>5173</code></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="cap">B · 搜索中 loading</div>
+  <div class="window">
+    <div class="titlebar"><div class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></div>进程查找关闭工具</div>
+    <div class="top"><h1>本机进程与端口</h1><div class="chip">标准用户</div></div>
+    <div class="body">
+      <div class="card">
+        <div class="seg"><span class="on">按进程名</span><span>按端口</span></div>
+        <div class="row">
+          <input value="node"/>
+          <button class="btn primary busy"><span class="spin"></span>查找中</button>
+          <button class="btn" disabled style="opacity:.45">刷新列表</button>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="phd">匹配结果 <span class="h">正在查询…</span></div>
+        <div class="loadbox">
+          <span class="spin dark" style="width:22px;height:22px;border-width:2.5px"></span>
+          <div>正在按进程名查找「node」</div>
+          <div class="bar"><i></i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="cap">C · 相关进程加载中</div>
+  <div class="window">
+    <div class="titlebar"><div class="dots"><i class="r"></i><i class="y"></i><i class="g"></i></div>进程查找关闭工具</div>
+    <div class="top"><h1>本机进程与端口</h1><div class="chip">标准用户</div></div>
+    <div class="body">
+      <div class="card">
+        <div class="seg"><span class="on">按进程名</span><span>按端口</span></div>
+        <div class="row"><input value="node"/><button class="btn primary">查找</button><span style="font-size:10px;color:#6B7280;margin-left:auto">30 条</span></div>
+      </div>
+      <div class="panel" style="min-height:0">
+        <div class="phd">匹配结果</div>
+        <table>
+          <thead><tr><th>PID</th><th>进程名</th><th>端口</th></tr></thead>
+          <tbody>
+            <tr class="sel"><td class="mono">140902</td><td>node.exe</td><td>5173</td></tr>
+            <tr><td class="mono">141088</td><td>node.exe</td><td class="muted">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="panel" style="min-height:0;margin-top:8px">
+        <div class="phd">相关进程 <span class="h">加载中</span></div>
+        <div class="rel-load">
+          <span class="spin dark"></span>
+          正在加载 PID 140902 的相关进程（父进程 / 同路径 / 同项目目录）…
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+<div class="note">
+  <b>v2_loading</b>（补充 SPEC）· ①默认打开：空引导态，不请求全量进程；②搜索：按钮变「查找中」+ 结果区 spinner/进度条，期间禁用刷新；③选中行：相关进程区先出行内 loading，出结果后再显示勾选表。超时 &gt;3s 可在区头显示「仍在加载…」。
+</div>
+</body></html>

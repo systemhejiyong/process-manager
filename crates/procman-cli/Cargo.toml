@@ -3,7 +3,7 @@ name = "procman-cli"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "Linux CLI for process-manager (procman)"
+description = "CLI for process-manager (procman)"
 
 [[bin]]
 name = "procman"

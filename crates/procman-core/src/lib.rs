@@ -260,8 +260,12 @@ fn parse_host_port(addr: &str) -> Option<u16> {
     }
 }
 
-pub fn list_processes() -> Vec<ProcessInfo> {
-    let ports = collect_listening_ports();
+fn collect_process_infos(with_ports: bool, with_project: bool) -> Vec<ProcessInfo> {
+    let ports = if with_ports {
+        collect_listening_ports()
+    } else {
+        HashMap::new()
+    };
     let mut sys = System::new_all();
     sys.refresh_processes(ProcessesToUpdate::All, true);
 
@@ -288,8 +292,11 @@ pub fn list_processes() -> Vec<ProcessInfo> {
         let cwd = proc_.cwd().map(|p| p.to_path_buf());
         let parent = proc_.parent().map(|p| p.as_u32());
         let parent_name = parent.and_then(|p| by_pid.get(&p).cloned());
-        let (project_dir, project_dir_note) =
-            infer_project_dir(cwd.as_deref(), &cmdline_vec, exe.as_deref());
+        let (project_dir, project_dir_note) = if with_project {
+            infer_project_dir(cwd.as_deref(), &cmdline_vec, exe.as_deref())
+        } else {
+            (None, None)
+        };
 
         out.push(ProcessInfo {
             pid: pid_u,
@@ -306,6 +313,16 @@ pub fn list_processes() -> Vec<ProcessInfo> {
     }
     out.sort_by_key(|p| p.pid);
     out
+}
+
+/// Full listing: listening ports + project-dir inference (filesystem walks).
+pub fn list_processes() -> Vec<ProcessInfo> {
+    collect_process_infos(true, true)
+}
+
+/// Fast listing for related-process matching: no ports, no project-dir walks.
+pub fn list_processes_lite() -> Vec<ProcessInfo> {
+    collect_process_infos(false, false)
 }
 
 pub fn search_by_name(query: &str) -> Vec<ProcessInfo> {
@@ -368,8 +385,18 @@ pub fn related_processes(selected: &ProcessInfo, all: &[ProcessInfo]) -> Vec<Rel
     }
     if let Some(ref dir) = selected.project_dir {
         if selected.project_dir_note.is_none() {
+            let dir_path = Path::new(dir);
             for p in all {
-                if p.project_dir.as_ref() == Some(dir) && p.pid != selected.pid {
+                if p.pid == selected.pid {
+                    continue;
+                }
+                // Full list may already have project_dir; lite list relies on cwd prefix.
+                let same_project = p.project_dir.as_ref() == Some(dir)
+                    || p.cwd.as_ref().is_some_and(|cwd| {
+                        let c = Path::new(cwd);
+                        c == dir_path || c.starts_with(dir_path)
+                    });
+                if same_project {
                     push(&mut out, &mut seen, "同项目", p);
                 }
             }

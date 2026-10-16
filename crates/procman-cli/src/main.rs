@@ -1,13 +1,13 @@
 use clap::{Parser, Subcommand};
 use procman_core::{
-    kill_many, list_processes, related_processes, search_by_name, search_by_port, watch_respawn,
+    kill_many, list_processes, list_processes_lite, related_processes, search_by_name, search_by_port, watch_respawn,
     ProcessInfo,
 };
 use std::io::{self, Write};
 use std::process::ExitCode;
 
 #[derive(Parser)]
-#[command(name = "procman", version, about = "进程查找关闭工具 — Linux CLI")]
+#[command(name = "procman", version, about = "进程查找关闭工具 — CLI")]
 struct Cli {
     #[command(subcommand)]
     cmd: Commands,
@@ -151,7 +151,7 @@ fn main() -> ExitCode {
             emit(&rows, json);
         }
         Commands::Related { pid, json } => {
-            let all = list_processes();
+            let all = list_processes_lite();
             let Some(sel) = all.iter().find(|p| p.pid == pid) else {
                 eprintln!("进程不存在: {pid}");
                 return ExitCode::from(2);
@@ -182,7 +182,7 @@ fn main() -> ExitCode {
             no_watch,
             watch,
         } => {
-            let all = list_processes();
+            let all = list_processes_lite();
             if let Some(ref n) = name {
                 let matched = search_by_name(n);
                 if matched.is_empty() {
