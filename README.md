@@ -37,9 +37,9 @@ Apple 以外平台的本机进程 / 端口查找与关闭工具：**Windows + Li
 
 ![一屏与日志](docs/readme/05-onescreen-log.png)
 
-**Windows 桌面包**
+**桌面主界面（Win/Linux GUI 同源；示意含 Windows 路径）**
 
-![Windows](docs/readme/06-windows.png)
+![桌面主界面](docs/readme/06-windows.png)
 
 ## 目录
 
