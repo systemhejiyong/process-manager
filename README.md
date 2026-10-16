@@ -6,37 +6,35 @@ Apple 以外平台的本机进程 / 端口查找与关闭工具：**Windows + Li
 
 ## 下载（Release）
 
-源码双仓对齐（`main`）：
+源码与 tag **`v0.1.0`** 已在双仓对齐；**安装包资产目前挂在 Gitee**（GitHub Release 资产后补）。
 
-- **GitHub**：https://github.com/systemhejiyong/process-manager  
-- **Gitee**：https://gitee.com/hogan_dev/process-manager  
+### GitHub（本仓）
 
-**安装包 / 二进制**目前挂在 **Gitee Release `v0.1.0`**（GitHub 侧 Release 资产后补；源码与 tag 已在 GitHub）。
-
-### 怎么下安装包
-
-1. 打开 [Gitee v0.1.0 Release](https://gitee.com/hogan_dev/process-manager/releases/tag/v0.1.0)  
-2. 在 **资产（Assets）** 里按平台下载  
-3. 若打不开：先登录 Gitee；私有仓需有仓库权限  
+1. 打开 https://github.com/systemhejiyong/process-manager  
+2. 点右侧 **Releases**（或仓库页 Releases）  
+3. 打开 **`v0.1.0`**（有 Assets 时按平台下载）
 
 直达：
 
-- **[v0.1.0 安装包（Gitee）](https://gitee.com/hogan_dev/process-manager/releases/tag/v0.1.0)**（当前有资产）  
-- Gitee 全部发行版：https://gitee.com/hogan_dev/process-manager/releases  
-- GitHub 仓库 / tag：https://github.com/systemhejiyong/process-manager/releases （资产待补）  
+- [v0.1.0 Release](https://github.com/systemhejiyong/process-manager/releases/tag/v0.1.0)
+- [全部 Releases](https://github.com/systemhejiyong/process-manager/releases)
+- 源码：https://github.com/systemhejiyong/process-manager.git
+
+### Gitee（现有安装包）
+
+1. 打开 https://gitee.com/hogan_dev/process-manager（私有仓需先登录）  
+2. 点 **发行版 / Releases** → **`v0.1.0`** → **资产（Assets）**
+
+直达：
+
+- [v0.1.0 Release（Gitee）](https://gitee.com/hogan_dev/process-manager/releases/tag/v0.1.0)
+- [全部发行版（Gitee）](https://gitee.com/hogan_dev/process-manager/releases)
+- 源码：https://gitee.com/hogan_dev/process-manager.git
 
 | 平台 | 建议下载资产 |
 | --- | --- |
 | Windows | `ProcessManager_0.1.0_x64_en-US.msi`（安装）或 `process-manager.exe`（便携）；CLI 用 `procman.exe` |
 | Linux | `ProcessManager_0.1.0_amd64.deb`，或 GUI 二进制 `process-manager-linux-amd64`；CLI 用 `procman` |
-
-克隆示例：
-
-```bash
-git clone https://github.com/systemhejiyong/process-manager.git
-# 或
-git clone https://gitee.com/hogan_dev/process-manager.git
-```
 
 本机构建产物也可在仓库 `dist/`（一般不入仓，仅构建机本地）。
 
