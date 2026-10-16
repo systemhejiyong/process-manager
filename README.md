@@ -6,24 +6,38 @@ Apple 以外平台的本机进程 / 端口查找与关闭工具：**Windows + Li
 
 ## 下载（Release）
 
-### 怎么进 Release
+源码双仓对齐（`main`）：
 
-1. 打开仓库：https://gitee.com/hogan_dev/process-manager  
-2. 仓库页点 **「发行版 / Releases」**（或直接打开下面链接）  
-3. 选标签 **`v0.1.0`**，在 **资产（Assets）** 里按平台下载  
-4. 若打不开：先登录 Gitee；私有仓需有仓库权限
+- **GitHub**：https://github.com/systemhejiyong/process-manager  
+- **Gitee**：https://gitee.com/hogan_dev/process-manager  
+
+**安装包 / 二进制**目前挂在 **Gitee Release `v0.1.0`**（GitHub 侧 Release 资产后补；源码与 tag 已在 GitHub）。
+
+### 怎么下安装包
+
+1. 打开 [Gitee v0.1.0 Release](https://gitee.com/hogan_dev/process-manager/releases/tag/v0.1.0)  
+2. 在 **资产（Assets）** 里按平台下载  
+3. 若打不开：先登录 Gitee；私有仓需有仓库权限  
 
 直达：
 
-- **[v0.1.0 Release 页面](https://gitee.com/hogan_dev/process-manager/releases/tag/v0.1.0)**（当前最新）
-- 全部发行版列表：https://gitee.com/hogan_dev/process-manager/releases
+- **[v0.1.0 安装包（Gitee）](https://gitee.com/hogan_dev/process-manager/releases/tag/v0.1.0)**（当前有资产）  
+- Gitee 全部发行版：https://gitee.com/hogan_dev/process-manager/releases  
+- GitHub 仓库 / tag：https://github.com/systemhejiyong/process-manager/releases （资产待补）  
 
 | 平台 | 建议下载资产 |
 | --- | --- |
 | Windows | `ProcessManager_0.1.0_x64_en-US.msi`（安装）或 `process-manager.exe`（便携）；CLI 用 `procman.exe` |
 | Linux | `ProcessManager_0.1.0_amd64.deb`，或 GUI 二进制 `process-manager-linux-amd64`；CLI 用 `procman` |
 
-源码仓：https://gitee.com/hogan_dev/process-manager.git  
+克隆示例：
+
+```bash
+git clone https://github.com/systemhejiyong/process-manager.git
+# 或
+git clone https://gitee.com/hogan_dev/process-manager.git
+```
+
 本机构建产物也可在仓库 `dist/`（一般不入仓，仅构建机本地）。
 
 ## 为什么用它
@@ -109,14 +123,14 @@ Windows 包路径示例（本机构建后）：`D:\work\process-manager\dist\win
 
 双远程，内容对齐（以 `main` 为准）：
 
-- Gitee：https://gitee.com/hogan_dev/process-manager （源仓 / Release `v0.1.0`）
-- GitHub：https://github.com/systemhejiyong/process-manager （镜像）
+- GitHub：https://github.com/systemhejiyong/process-manager  
+- Gitee：https://gitee.com/hogan_dev/process-manager （当前 Release 安装包所在）  
 
 ```bash
-git remote add origin https://gitee.com/hogan_dev/process-manager.git   # 若尚无
-git remote add github https://github.com/systemhejiyong/process-manager.git
+git remote add origin https://github.com/systemhejiyong/process-manager.git   # 或 Gitee URL
+git remote add gitee https://gitee.com/hogan_dev/process-manager.git
 git push origin main
-git push github main
+git push gitee main
 ```
 
 ## 说明
