@@ -6,17 +6,25 @@ Apple 以外平台的本机进程 / 端口查找与关闭工具：**Windows + Li
 
 ## 下载（Release）
 
-发行包在 Gitee Releases，点进去选平台资产即可：
+### 怎么进 Release
+
+1. 打开仓库：https://gitee.com/hogan_dev/process-manager  
+2. 仓库页点 **「发行版 / Releases」**（或直接打开下面链接）  
+3. 选标签 **`v0.1.0`**，在 **资产（Assets）** 里按平台下载  
+4. 若打不开：先登录 Gitee；私有仓需有仓库权限
+
+直达：
 
 - **[v0.1.0 Release 页面](https://gitee.com/hogan_dev/process-manager/releases/tag/v0.1.0)**（当前最新）
-- 仓库 Releases 列表：https://gitee.com/hogan_dev/process-manager/releases
+- 全部发行版列表：https://gitee.com/hogan_dev/process-manager/releases
 
-| 平台 | 建议下载 |
+| 平台 | 建议下载资产 |
 | --- | --- |
-| Windows | `.msi` 安装包，或便携 `.exe` / CLI |
-| Linux | `.deb`，或 GUI / CLI 二进制 |
+| Windows | `ProcessManager_0.1.0_x64_en-US.msi`（安装）或 `process-manager.exe`（便携）；CLI 用 `procman.exe` |
+| Linux | `ProcessManager_0.1.0_amd64.deb`，或 GUI 二进制 `process-manager-linux-amd64`；CLI 用 `procman` |
 
-源码仓：https://gitee.com/hogan_dev/process-manager.git
+源码仓：https://gitee.com/hogan_dev/process-manager.git  
+本机构建产物也可在仓库 `dist/`（一般不入仓，仅构建机本地）。
 
 ## 为什么用它
 
