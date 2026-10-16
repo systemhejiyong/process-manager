@@ -4,6 +4,20 @@ Apple 以外平台的本机进程 / 端口查找与关闭工具：**Windows + Li
 
 数据只在本机，不上传。
 
+## 下载（Release）
+
+发行包在 Gitee Releases，点进去选平台资产即可：
+
+- **[v0.1.0 Release 页面](https://gitee.com/hogan_dev/process-manager/releases/tag/v0.1.0)**（当前最新）
+- 仓库 Releases 列表：https://gitee.com/hogan_dev/process-manager/releases
+
+| 平台 | 建议下载 |
+| --- | --- |
+| Windows | `.msi` 安装包，或便携 `.exe` / CLI |
+| Linux | `.deb`，或 GUI / CLI 二进制 |
+
+源码仓：https://gitee.com/hogan_dev/process-manager.git
+
 ## 为什么用它
 
 | 优势 | 说明 |
