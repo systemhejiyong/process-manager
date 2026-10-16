@@ -107,7 +107,17 @@ Windows 包路径示例（本机构建后）：`D:\work\process-manager\dist\win
 
 ## 远程仓库
 
-- Gitee：`https://gitee.com/hogan_dev/process-manager.git`
+双远程，内容对齐（以 `main` 为准）：
+
+- Gitee：https://gitee.com/hogan_dev/process-manager （源仓 / Release `v0.1.0`）
+- GitHub：https://github.com/systemhejiyong/process-manager （镜像）
+
+```bash
+git remote add origin https://gitee.com/hogan_dev/process-manager.git   # 若尚无
+git remote add github https://github.com/systemhejiyong/process-manager.git
+git push origin main
+git push github main
+```
 
 ## 说明
 
